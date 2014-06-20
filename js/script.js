@@ -1008,3 +1008,40 @@ function getHistory(){
     table.clone().appendTo("#history-view");
     $("#history-view-mobile table").removeClass("table-striped");
 }
+
+// Chess Overlay functions
+
+function drawArrow(fromSquare, toSquare, type) {
+    var fromPos = getPosition(fromSquare);
+    var toPos = getPosition(toSquare);
+
+    var fromX = fromPos.x * 10 + 15;
+    var fromY = fromPos.y * 10 + 15;
+    var toX = toPos.x * 10 + 15;
+    var toY = toPos.y * 10 + 15;
+
+    var svgElement = d3.select("#board-overlay-svg");
+    svgElement.append("line")
+      .attr("x1", fromX + "%" ).attr("y1", fromY + "%")
+      .attr("x2", toX + "%").attr("y2", toY + "%")
+      .attr("marker-end", "url(#arrowHead)")
+      .attr("stroke", "#000000")
+      .attr("stroke-width", "5");
+}
+
+function clearArrows() {
+    var svgElement = d3.select("#board-overlay-svg");
+    svgElement.selectAll("line").remove();
+}
+
+// Translates a chess square co-ordinate to the actual co-ordinate on the board.
+function getPosition(squareString) {
+    squareString = squareString.trim();
+    var letter = squareString[0].toLowerCase();
+    var number = parseInt(squareString[1]);
+
+    var x = charToNum(letter);
+    var y = 8 - number;
+
+    return { x: x, y: y };
+}

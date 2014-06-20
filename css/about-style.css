@@ -1,0 +1,84 @@
+/*
+ * body
+ ******************************/
+ 
+body{
+	background-image: url(../img/background.png);	
+}
+
+ body{
+ 	background-color: #2e6729;
+ 	padding-top:50px;
+ }
+
+ body:before {
+    content: " ";
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    background: -webkit-radial-gradient(center center, ellipse cover, rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%);
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-weight:300;
+}
+
+h1 {
+	font-weight:300;
+	font-size:50px;
+	text-align:center;
+	line-height:55px;
+	text-shadow:0 1px 1px rgba(0,0,0,0.8);
+	margin-bottom:30px;
+}
+
+
+ /*
+ * Header
+ ******************************/
+ header{
+ 	text-align: center;
+ }
+
+ /*
+ * Section
+ ******************************/
+ section{
+ 	margin: 50px 0;
+ 	padding:40px;
+ 	background: white;
+ 	-moz-box-shadow: 0 0 6px #888;
+	-webkit-box-shadow: 0 0 6px#888;
+	box-shadow: 0 0 10px #888;
+ }
+
+ section header h2{
+ 	text-align: center;
+ }
+ article h3{
+ 	text-shadow:0 1px 1px rgba(0,0,0,0.2);
+ }
+
+ /*
+ * The team
+ ******************************/
+
+ .thumbnail{
+ 	border:none;
+ 	text-align: center;
+ }
+
+ .thumbnail img{
+ 	border-radius: 10px;
+ }
+
+/*
+ * Footer
+ ******************************/
+footer p.copyright {
+    text-align:center;
+    margin: 20px 0;
+}

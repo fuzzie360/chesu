@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<head>
+    <title>Chess</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=false">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/board.css">
+</head>
+<body>
+    <div id="drag-layer"></div>
+
+    <div class="container-outer board-container">
+        <div class="container-inner board-container-inner">
+            <div id="board" class="hide">
+                <img class="board-bg" src="img/board.png">
+            </div>
+        </div>
+    </div>
+
+    <div class="container-outer" style="z-index:100">
+        <div class="container-inner">
+            <div id="main" class="animated bounceInDown">
+                <div class="panel panel-default glow">
+                    <!--<div class="panel-heading text-center">Cloud Chess</div>-->
+                    <div class="panel-body text-center">
+                        <p>
+                            <img src="img/logo.png" width="143" height="129">
+                        </p>
+                        <p>
+                            <a href="javascript:navigate('#new-game')" class="online-only btn btn-default btn-lg btn-block">
+                                Play against CPU
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div id="new-game" class="hide">
+                <div class="panel panel-default glow">
+                    <div class="panel-heading text-center">Play against CPU <a class="close" href="javascript:navigate('#main')">&times;</a></div>
+                    <div class="panel-body text-center">
+                        <form role="form">
+                            <div class="form-group">
+                                <label for="side">Choose your side</label>
+                                <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                    <label class="btn btn-default btn-lg active">
+                                        <input type="radio" name="side" value="w" checked> White
+                                    </label>
+                                    <label class="btn btn-default btn-lg">
+                                        <input type="radio" name="side" value="b"> Black
+                                    </label>
+                                    <label class="btn btn-default btn-lg">
+                                        <input type="radio" name="side" value="r"> Random
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="difficulty">Choose diffulty</label>
+                                <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                    <label class="btn btn-default btn-lg">
+                                        <input type="radio" name="difficulty" value="e"> Easy
+                                    </label>
+                                    <label class="btn btn-default btn-lg active">
+                                        <input type="radio" name="difficulty" value="m" checked> Medium
+                                    </label>
+                                    <label class="btn btn-default btn-lg">
+                                        <input type="radio" name="difficulty" value="h"> Hard
+                                    </label>
+                                </div>
+                            </div>
+                            <a href="javascript:playWithComputer()" class="btn btn-primary btn-lg btn-block">
+                                Let's play!
+                            </a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="loading" class="hide">
+                <div class="panel panel-default glow">
+                    <div class="panel-heading text-center">Loading</div>
+                    <div class="panel-body text-center">
+                        <i class="icon-spinner icon-spin icon-large"></i>
+                    </div>
+                </div>
+            </div>
+            <div id="checkmate-white" class="hide">
+                <div class="panel panel-default glow">
+                    <div class="panel-heading text-center">Checkmate!</div>
+                    <div class="panel-body text-center">
+                        <h4>White checkmates!</h4>
+                        <a href="javascript:dismissBoard(function(){ navigate('#main'); });" class="btn btn-primary btn-block">
+                            Back to Main Menu!
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="checkmate-black" class="hide">
+                <div class="panel panel-default glow">
+                    <div class="panel-heading text-center">Checkmate!</div>
+                    <div class="panel-body text-center">
+                        <h4>Black checkmates!</h4>
+                        <a href="javascript:dismissBoard(function(){ navigate('#main'); });" class="btn btn-primary btn-block">
+                            Back to Main Menu!
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="fifty" class="hide">
+                <div class="panel panel-default glow">
+                    <div class="panel-heading text-center">Draw!</div>
+                    <div class="panel-body text-center">
+                        <h4>Draw by 50-move rule.</h4>
+                        <a href="javascript:dismissBoard(function(){ navigate('#main'); });" class="btn btn-primary btn-block">
+                            Back to Main Menu!
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="material" class="hide">
+                <div class="panel panel-default glow">
+                    <div class="panel-heading text-center">Draw!</div>
+                    <div class="panel-body text-center">
+                        <h4>Draw by insufficient material.</h4>
+                        <a href="javascript:dismissBoard(function(){ navigate('#main'); });" class="btn btn-primary btn-block">
+                            Back to Main Menu!
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="threefold" class="hide">
+                <div class="panel panel-default glow">
+                    <div class="panel-heading text-center">Draw!</div>
+                    <div class="panel-body text-center">
+                        <h4>Draw by threefold repitition.</h4>
+                        <a href="javascript:navigate('#main', dismissBoard);" class="btn btn-primary btn-block">
+                            Back to Main Menu!
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="stalemate" class="hide">
+                <div class="panel panel-default glow">
+                    <div class="panel-heading text-center">Stalemate!</div>
+                    <div class="panel-body text-center">
+                        <h4>Draw by stalemate.</h4>
+                        <a href="javascript:dismissBoard(function(){ navigate('#main'); });" class="btn btn-primary btn-block">
+                            Back to Main Menu!
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="oops" class="hide">
+                <div class="panel panel-default glow">
+                    <div class="panel-heading text-center">Oops!</div>
+                    <div class="panel-body text-center">
+                        <h4>Sorry... something went wrong.</h4>
+                        <a href="javascript:dismissBoard(function(){ navigate('#main'); }); disconnectSocket();" class="btn btn-primary btn-block">
+                            Back to Main Menu!
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="promote" class="hide">
+                <div class="panel panel-default glow">
+                    <div class="panel-heading text-center">Promotion!</div>
+                    <div class="panel-body text-center">
+                        <h4>Choose what piece to promote to</h4>
+                        <a id="promote-q" href="javascript:promote('q')" class="btn btn-default btn-block hide promote-btn">
+                            Queen
+                        </a>
+                        <a id="promote-r" href="javascript:promote('r')" class="btn btn-default btn-block hide promote-btn">
+                            Rook
+                        </a>
+                        <a id="promote-b" href="javascript:promote('b')" class="btn btn-default btn-block hide promote-btn">
+                            Bishop
+                        </a>
+                        <a id="promote-n" href="javascript:promote('n')" class="btn btn-default btn-block hide promote-btn">
+                            Knight
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="abandon-confirm" class="hide">
+                <div class="panel panel-default glow">
+                    <div class="panel-heading text-center">Abandon game <a class="close" href="javascript:dismiss('#abandon-confirm');">&times;</a></div>
+                    <div class="panel-body text-center">
+                        <h4>Are you sure?</h4>
+                        <a href="javascript:dismissBoard(function() { navigate(abandonTo); });" class="btn btn-primary btn-block">
+                            Yes
+                        </a>
+                        <a href="javascript:dismiss('#abandon-confirm');" class="btn btn-default btn-block">
+                            No
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="difficulty-prompt" class="hide">
+                <div class="panel panel-default glow">
+                    <div class="panel-heading text-center">Change difficulty <a class="close" href="javascript:dismiss('#difficulty-prompt')">&times;</a></div>
+                    <div class="panel-body text-center">
+                        <div class="form-group">
+                            <label for="difficulty">Choose diffulty</label>
+                            <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                <label onclick="javascript:difficulty('e')" class="btn btn-default btn-lg active">
+                                    <input type="radio" name="difficulty" value="e" checked> Easy
+                                </label>
+                                <label onclick="javascript:difficulty('m')" class="btn btn-default btn-lg">
+                                    <input type="radio" name="difficulty" value="m"> Medium
+                                </label>
+                                <label onclick="javascript:difficulty('h')" class="btn btn-default btn-lg">
+                                    <input type="radio" name="difficulty" value="h"> Hard
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="save-prompt" class="hide">
+                <div class="panel panel-default glow">
+                    <div class="panel-heading text-center">Save game <a class="close" href="javascript:dismiss('#save-prompt')">&times;</a></div>
+                    <div class="panel-body text-center">
+                        <div class="form-group">
+                            <input autofocus type="text" name="save-name" id="save-name" class="form-control" placeholder="Save game name here...">
+                        </div>
+                        <a href="javascript:save();" class="btn btn-primary btn-block">
+                            Save
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="load-prompt" class="hide">
+                <div class="panel panel-default glow">
+                    <div class="panel-heading text-center">Select a saved game <!--<a class="close" href="javascript:dismiss('#load-prompt')">&times;</a>--></div>
+                    <div class="panel-body text-center">
+                        <div id="load-list">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOLY MOTHER OF JAVASCRIPT BLOCKS BATMAN -->
+    <script type="text/javascript" src="js/underscore.min.js"></script>
+    <script type="text/javascript" src="js/chess.min.js"></script>
+    <script type="text/javascript" src="js/PxLoader.js"></script>
+    <script type="text/javascript" src="js/PxLoaderImage.js"></script>
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/ejs_production.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>

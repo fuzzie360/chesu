@@ -1,0 +1,152 @@
+/*
+ * Board
+ ******************************/
+
+#board {
+    width:500px;
+    height:500px;
+    position:relative;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#board img.board-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index:-1;
+    width:100%;
+    height:100%;    
+}
+
+#board img.piece {
+    cursor: pointer;
+    position: absolute;
+    z-index: 10;
+    width:10%;
+    height:10%;
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+}
+
+#board img.piece.unselectable {
+    cursor: not-allowed !important;
+}
+
+#board img.unanimate {
+    transition: none !important;
+    -webkit-transition: none !important;
+}
+
+#board img.highlight {
+    position: absolute;
+    z-index: 15;
+    width:10%;
+    height:10%;
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+}
+
+#board img.fade {
+    opacity: 0.2;
+}
+
+
+#board img.piece.selected {
+    width: 15%;
+    height: 15%;
+    margin-left: -2.5%;
+    margin-bottom: -2.5%;
+    z-index: 20;
+}
+
+#board img.piece.suggestion {
+    z-index: 20 !important;
+}
+
+#board img.indicator {
+    width: 3%;
+    height: 3%;
+    position: absolute;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+}
+
+#board img.indicator.w {
+    left: 91%;
+    bottom: 6%;
+}
+
+#board img.indicator.b {
+    left: 91%;
+    bottom: 91%;
+}
+
+.a1 { bottom: 10%; left: 10%; }
+.a2 { bottom: 20%; left: 10%; }
+.a3 { bottom: 30%; left: 10%; }
+.a4 { bottom: 40%; left: 10%; }
+.a5 { bottom: 50%; left: 10%; }
+.a6 { bottom: 60%; left: 10%; }
+.a7 { bottom: 70%; left: 10%; }
+.a8 { bottom: 80%; left: 10%; }
+.b1 { bottom: 10%; left: 20%; }
+.b2 { bottom: 20%; left: 20%; }
+.b3 { bottom: 30%; left: 20%; }
+.b4 { bottom: 40%; left: 20%; }
+.b5 { bottom: 50%; left: 20%; }
+.b6 { bottom: 60%; left: 20%; }
+.b7 { bottom: 70%; left: 20%; }
+.b8 { bottom: 80%; left: 20%; }
+.c1 { bottom: 10%; left: 30%; }
+.c2 { bottom: 20%; left: 30%; }
+.c3 { bottom: 30%; left: 30%; }
+.c4 { bottom: 40%; left: 30%; }
+.c5 { bottom: 50%; left: 30%; }
+.c6 { bottom: 60%; left: 30%; }
+.c7 { bottom: 70%; left: 30%; }
+.c8 { bottom: 80%; left: 30%; }
+.d1 { bottom: 10%; left: 40%; }
+.d2 { bottom: 20%; left: 40%; }
+.d3 { bottom: 30%; left: 40%; }
+.d4 { bottom: 40%; left: 40%; }
+.d5 { bottom: 50%; left: 40%; }
+.d6 { bottom: 60%; left: 40%; }
+.d7 { bottom: 70%; left: 40%; }
+.d8 { bottom: 80%; left: 40%; }
+.e1 { bottom: 10%; left: 50%; }
+.e2 { bottom: 20%; left: 50%; }
+.e3 { bottom: 30%; left: 50%; }
+.e4 { bottom: 40%; left: 50%; }
+.e5 { bottom: 50%; left: 50%; }
+.e6 { bottom: 60%; left: 50%; }
+.e7 { bottom: 70%; left: 50%; }
+.e8 { bottom: 80%; left: 50%; }
+.f1 { bottom: 10%; left: 60%; }
+.f2 { bottom: 20%; left: 60%; }
+.f3 { bottom: 30%; left: 60%; }
+.f4 { bottom: 40%; left: 60%; }
+.f5 { bottom: 50%; left: 60%; }
+.f6 { bottom: 60%; left: 60%; }
+.f7 { bottom: 70%; left: 60%; }
+.f8 { bottom: 80%; left: 60%; }
+.g1 { bottom: 10%; left: 70%; }
+.g2 { bottom: 20%; left: 70%; }
+.g3 { bottom: 30%; left: 70%; }
+.g4 { bottom: 40%; left: 70%; }
+.g5 { bottom: 50%; left: 70%; }
+.g6 { bottom: 60%; left: 70%; }
+.g7 { bottom: 70%; left: 70%; }
+.g8 { bottom: 80%; left: 70%; }
+.h1 { bottom: 10%; left: 80%; }
+.h2 { bottom: 20%; left: 80%; }
+.h3 { bottom: 30%; left: 80%; }
+.h4 { bottom: 40%; left: 80%; }
+.h5 { bottom: 50%; left: 80%; }
+.h6 { bottom: 60%; left: 80%; }
+.h7 { bottom: 70%; left: 80%; }
+.h8 { bottom: 80%; left: 80%; }
